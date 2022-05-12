@@ -65,10 +65,7 @@ if (isset($data) &&
             'showif' => [
               'dynamic' => true,
               'entrydisplay' => 'popup',
-              'popuptemplate' => [
-                '_map_popup_html.twig' => true,
-                'custom' => true
-                ]
+              'popuptemplate' => '_map_popup_html.twig'
             ]
         ];
     }
@@ -83,10 +80,7 @@ if (isset($data) &&
             'showif' => [
               'dynamic' => true,
               'entrydisplay' => 'popup',
-              'popuptemplate' => [
-                '_map_popup_from_data.twig' => true,
-                'custom' => true
-                ]
+              'popuptemplate' => '_map_popup_from_data.twig'
             ]
         ];
     }
