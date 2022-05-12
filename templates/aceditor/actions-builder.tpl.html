@@ -89,7 +89,7 @@ if (isset($data) &&
 $paths = $this->twigLoader->getPaths("aceditor");
 
 // render next following custom actions-builder.tpl.html
-$curPos = array_search('tools/groupmanagement/templates/aceditor',$paths);
+$curPos = array_search('tools/alternativemapdynamic/templates/aceditor',$paths);
 if ($curPos !== false) {
     for ($i=($curPos+1); $i < count($paths); $i++) { 
         if ($this->hasTemplate("{$paths[$i]}/actions-builder.tpl.html")){
