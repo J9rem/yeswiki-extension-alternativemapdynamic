@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let result = this.searchedEntries
         for(const filterId in this.computedFilters) {
           result = result.filter(entry => {
-            if (!entry[filterId]) return false
+            if (!entry[filterId] || typeof entry[filterId] != "string") return false
             return entry[filterId].split(',').some(value => {
               return this.computedFilters[filterId].includes(value)
             })
@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
           for (let option of this.filters[fieldName].list) {
             option.nb = this.searchedEntries.filter(entry => {
               let entryValues = entry[fieldName]
-              if (!entryValues) return
+              if (!entryValues || typeof entryValues != "string") return
               entryValues = entryValues.split(',')
               return entryValues.some(value => value == option.value)
             }).length
@@ -273,6 +273,20 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         }
         return `${prefix}files/${fileName}`;
+      },
+      urlImageRealOnError(entry,fieldName) {
+        let node = $(event.target);
+        let previousUrl = $(node).prop('src');
+        if (entry[fieldName]){
+          let fileName = entry[fieldName];
+          let baseUrl = entry.url.slice(0,-entry.id_fiche.length).replace(/\?$/,"").replace(/\/$/,"");
+          let newurl = `${baseUrl}/files/${fileName}`;
+          if (newurl != previousUrl){
+            $(`img[src="${previousUrl}"]`).each(function(){
+              $(this).prop('src',newurl);
+            });
+          }
+        }
       }
     },
     mounted() {
